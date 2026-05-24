@@ -2,6 +2,8 @@
 
 Clinical document intelligence platform. Secure ingestion, LLM-powered analysis, and audit-compliant access for healthcare data.
 
+![MedInsight Dashboard](frontend/public/screenshot.png)
+
 ## Architecture
 
 ```
