@@ -96,8 +96,17 @@ class LLMService:
     def _parse_result(self, analysis_type: AnalysisType, raw: dict) -> AnalysisResult:
         return AnalysisResult(
             summary=raw.get("summary"),
-            diagnoses=[Diagnosis(**d) for d in raw.get("diagnoses", [])],
-            medications=[Medication(**m) for m in raw.get("medications", [])],
-            risk_factors=[RiskFactor(**r) for r in raw.get("risk_factors", [])],
+            diagnoses=[
+                Diagnosis(**d) if isinstance(d, dict) else Diagnosis(description=d, confidence=0.8)
+                for d in raw.get("diagnoses", [])
+            ],
+            medications=[
+                Medication(**m) if isinstance(m, dict) else Medication(name=m)
+                for m in raw.get("medications", [])
+            ],
+            risk_factors=[
+                RiskFactor(**r) if isinstance(r, dict) else RiskFactor(factor=r, severity="medium", rationale="")
+                for r in raw.get("risk_factors", [])
+            ],
             raw=raw,
         )
