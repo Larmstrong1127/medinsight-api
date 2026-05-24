@@ -4,6 +4,8 @@ Clinical document intelligence platform. Secure ingestion, LLM-powered analysis,
 
 ![MedInsight Dashboard](frontend/public/screenshot.png)
 
+![MedInsight Agent](frontend/public/screenshot-agent.png)
+
 ## Architecture
 
 ```
