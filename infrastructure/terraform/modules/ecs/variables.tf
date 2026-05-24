@@ -1,0 +1,14 @@
+variable "project" { type = string }
+variable "environment" { type = string }
+variable "aws_region" { type = string }
+variable "vpc_id" { type = string }
+variable "private_subnet_ids" { type = list(string) }
+variable "public_subnet_ids" { type = list(string) }
+variable "task_execution_role" { type = string }
+variable "task_role" { type = string }
+variable "ecr_repository_url" { type = string }
+variable "s3_bucket" { type = string }
+variable "dynamodb_table" { type = string }
+variable "audit_table" { type = string }
+variable "container_port" { type = number }
+variable "desired_count" { type = number }

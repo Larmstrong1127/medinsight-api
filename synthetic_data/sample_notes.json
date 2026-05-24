@@ -1,0 +1,27 @@
+[
+  {
+    "patient_id": "pt-synthetic-001",
+    "document_type": "admission_note",
+    "content": "Patient: Synthetic Male, Age 67. Admitted for evaluation of chest pain and dyspnea. PMH: HTN, T2DM, hyperlipidemia. Medications: Metformin 1000mg BID, Atorvastatin 40mg QD, Amlodipine 5mg QD. Vitals: BP 158/94, HR 88, RR 18, SpO2 94%. EKG shows ST depression leads V4-V6. Troponin I 0.8 ng/mL (elevated). Assessment: NSTEMI. Plan: Heparin drip, aspirin 325mg, clopidogrel 600mg loading dose, cardiology consult for possible cath lab."
+  },
+  {
+    "patient_id": "pt-synthetic-002",
+    "document_type": "discharge_summary",
+    "content": "Synthetic Female, Age 54, admitted with community-acquired pneumonia. Treated with IV ceftriaxone and azithromycin for 3 days, transitioned to PO levofloxacin. Fevers resolved by day 2. Chest X-ray at discharge shows clearing of right lower lobe infiltrate. Discharged on levofloxacin 500mg QD x5 days. Follow-up with PCP in 1 week. Diagnoses: 1. Community-acquired pneumonia (J18.9), 2. Type 2 diabetes mellitus, well-controlled (E11.9)."
+  },
+  {
+    "patient_id": "pt-synthetic-003",
+    "document_type": "progress_note",
+    "content": "Day 3 post-op from elective laparoscopic cholecystectomy. Patient reports tolerable pain, 4/10 at incision sites, controlled with acetaminophen 650mg q6h. Ambulating in hallway TID. Tolerating regular diet. Bowel sounds present. Incision sites clean, no signs of infection. Plan: Continue current management, anticipate discharge tomorrow if clinical status maintained. Post-op diagnoses: Cholelithiasis with chronic cholecystitis."
+  },
+  {
+    "patient_id": "pt-synthetic-004",
+    "document_type": "radiology_report",
+    "content": "CT Chest with contrast. Clinical indication: Pulmonary embolism protocol. Findings: Filling defects identified in the right main pulmonary artery and extending into the right upper and lower lobe branches consistent with acute pulmonary embolism. No evidence of right heart strain. No pleural effusion. Lung parenchyma unremarkable. Impression: Acute bilateral pulmonary embolism. Recommend anticoagulation therapy."
+  },
+  {
+    "patient_id": "pt-synthetic-001",
+    "document_type": "progress_note",
+    "content": "Post-cath day 1. Patient underwent successful PCI with drug-eluting stent to LAD. TIMI 3 flow achieved. EKG shows resolution of ST changes. Troponin trending down: 0.4 ng/mL. Patient chest pain free. Continue dual antiplatelet therapy: aspirin 81mg QD and clopidogrel 75mg QD x12 months. Lisinopril 5mg QD added for post-MI cardioprotection. Cardiac rehab referral placed. Discharge planned for tomorrow."
+  }
+]

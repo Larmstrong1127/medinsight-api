@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      target: production
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data  # local storage for dev only
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # LocalStack simulates AWS services locally (S3, DynamoDB, KMS)
+  localstack:
+    image: localstack/localstack:3
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,dynamodb,kms,cloudtrail
+      - DEBUG=0
+    volumes:
+      - localstack_data:/var/lib/localstack
+      - ./infrastructure/localstack-init:/etc/localstack/init/ready.d
+
+volumes:
+  localstack_data:
