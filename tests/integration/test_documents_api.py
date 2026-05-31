@@ -8,10 +8,14 @@ import pytest
 @pytest.fixture
 def isolated_client(tmp_path, monkeypatch):
     """Client with isolated local storage so tests don't share state."""
+    import os
     from cryptography.fernet import Fernet
     monkeypatch.setenv("STORAGE_BACKEND", "local")
     monkeypatch.setenv("LOCAL_STORAGE_PATH", str(tmp_path))
     monkeypatch.setenv("ENCRYPTION_KEY", Fernet.generate_key().decode())
+    # Ensure the valid API key matches what the auth fixture provides
+    api_key = os.environ.get("API_KEYS", "dev-key-change-me-in-production")
+    monkeypatch.setenv("API_KEYS", api_key)
     from app import config
     config.get_settings.cache_clear()
 
@@ -26,7 +30,9 @@ def isolated_client(tmp_path, monkeypatch):
 
 @pytest.fixture
 def auth():
-    return {"X-API-Key": "dev-key-change-me-in-production"}
+    import os
+    key = os.environ.get("API_KEYS", "dev-key-change-me-in-production").split(",")[0].strip()
+    return {"X-API-Key": key}
 
 
 @pytest.fixture

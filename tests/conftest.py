@@ -16,7 +16,9 @@ def client(app):
 
 @pytest.fixture
 def auth_headers():
-    return {"X-API-Key": "dev-key-change-me-in-production"}
+    import os
+    key = os.environ.get("API_KEYS", "dev-key-change-me-in-production").split(",")[0].strip()
+    return {"X-API-Key": key}
 
 
 @pytest.fixture
