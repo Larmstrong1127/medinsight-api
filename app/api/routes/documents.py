@@ -49,7 +49,7 @@ async def list_documents(
     return result
 
 
-@router.get("/{document_id}", response_model=Document)
+@router.get("/{document_id}", response_model=None)
 async def get_document(
     document_id: str,
     api_key: ApiKey,
