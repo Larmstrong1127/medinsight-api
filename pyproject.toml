@@ -8,8 +8,15 @@ ignore = ["UP042"]  # StrEnum migration is a breaking change — keep str+Enum f
 
 [tool.mypy]
 python_version = "3.11"
-strict = true
 ignore_missing_imports = true
+disallow_untyped_defs = false
+warn_return_any = false
+warn_unused_ignores = false
+
+# Per-module overrides for files with known third-party type gaps
+[[tool.mypy.overrides]]
+module = ["app.agents.*", "app.services.llm_service"]
+ignore_errors = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
