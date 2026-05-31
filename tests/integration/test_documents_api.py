@@ -9,6 +9,7 @@ import pytest
 def isolated_client(tmp_path, monkeypatch):
     """Client with isolated local storage so tests don't share state."""
     import os
+
     from cryptography.fernet import Fernet
     monkeypatch.setenv("STORAGE_BACKEND", "local")
     monkeypatch.setenv("LOCAL_STORAGE_PATH", str(tmp_path))
