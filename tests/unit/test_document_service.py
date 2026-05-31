@@ -6,8 +6,10 @@ from app.services.document_service import DocumentNotFoundError, DocumentService
 
 @pytest.fixture
 def doc_service(tmp_path, monkeypatch):
+    from cryptography.fernet import Fernet
     monkeypatch.setenv("STORAGE_BACKEND", "local")
     monkeypatch.setenv("LOCAL_STORAGE_PATH", str(tmp_path))
+    monkeypatch.setenv("ENCRYPTION_KEY", Fernet.generate_key().decode())
     from app import config
     config.get_settings.cache_clear()
     yield DocumentService()
