@@ -71,7 +71,7 @@ async def get_document(
             resource_id=document_id,
             detail="not_found",
         )
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Document not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Document not found") from None
 
     auditor.record(
         action=AuditAction.DOCUMENT_READ,

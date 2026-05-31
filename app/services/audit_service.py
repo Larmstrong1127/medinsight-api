@@ -1,7 +1,6 @@
 import json
-import os
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import boto3
@@ -34,7 +33,7 @@ class AuditService:
     ) -> AuditLog:
         log = AuditLog(
             id=str(uuid.uuid4()),
-            timestamp=datetime.now(tz=timezone.utc),
+            timestamp=datetime.now(tz=UTC),
             action=action,
             resource_id=resource_id,
             api_key_prefix=api_key[:8] if len(api_key) >= 8 else api_key,

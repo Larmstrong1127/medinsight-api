@@ -1,7 +1,7 @@
 import hashlib
 import json
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import boto3
@@ -31,7 +31,7 @@ class DocumentService:
         doc_id = str(uuid.uuid4())
         checksum = hashlib.sha256(payload.content.encode()).hexdigest()
         encrypted = encrypt_content(payload.content)
-        now = datetime.now(tz=timezone.utc)
+        now = datetime.now(tz=UTC)
 
         record = {
             "id": doc_id,
@@ -76,10 +76,7 @@ class DocumentService:
         return doc
 
     def list_documents(self, patient_id: str | None = None) -> DocumentList:
-        if self._use_aws():
-            records = self._list_s3(patient_id)
-        else:
-            records = self._list_local(patient_id)
+        records = self._list_s3(patient_id) if self._use_aws() else self._list_local(patient_id)
 
         docs = [
             Document(

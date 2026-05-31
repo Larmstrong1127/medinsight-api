@@ -1,3 +1,7 @@
+import json
+import uuid
+from datetime import UTC, datetime
+
 from openai import AsyncOpenAI
 
 from app.config import get_settings
@@ -13,10 +17,6 @@ from app.models.analysis import (
 )
 from app.services.document_service import DocumentService
 
-import json
-import uuid
-from datetime import datetime, timezone
-
 logger = get_logger(__name__)
 
 _SYSTEM_PROMPT = """You are a clinical NLP assistant. Analyze the provided clinical note and extract
@@ -28,7 +28,7 @@ _PROMPTS: dict[AnalysisType, str] = {
 Return JSON: {"summary": "..."}""",
 
     AnalysisType.EXTRACT_DIAGNOSES: """Extract all diagnoses and conditions mentioned.
-Return JSON: {"diagnoses": [{"code": "ICD-10 if determinable or null", "description": "...", "confidence": 0.0-1.0}]}""",
+Return JSON: {"diagnoses": [{"code": "ICD-10 or null", "description": "...", "confidence": 0.0-1.0}]}""",
 
     AnalysisType.EXTRACT_MEDICATIONS: """Extract all medications mentioned.
 Return JSON: {"medications": [{"name": "...", "dosage": "or null", "frequency": "or null", "route": "or null"}]}""",
@@ -90,7 +90,7 @@ class LLMService:
             analysis_type=request.analysis_type,
             result=result,
             model_used=self.settings.openai_model,
-            created_at=datetime.now(tz=timezone.utc),
+            created_at=datetime.now(tz=UTC),
         )
 
     def _parse_result(self, analysis_type: AnalysisType, raw: dict) -> AnalysisResult:

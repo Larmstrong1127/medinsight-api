@@ -15,8 +15,9 @@ def isolated_client(tmp_path, monkeypatch):
     from app import config
     config.get_settings.cache_clear()
 
-    from app.main import create_app
     from fastapi.testclient import TestClient
+
+    from app.main import create_app
     with TestClient(create_app()) as c:
         yield c
 
@@ -167,5 +168,5 @@ class TestAuditTrail:
 
         audit_res = isolated_client.get("/api/v1/audit/logs", headers=auth)
         logs = audit_res.json()["logs"]
-        failure_logs = [l for l in logs if l["outcome"] == "failure"]
+        failure_logs = [log for log in logs if log["outcome"] == "failure"]
         assert len(failure_logs) >= 1

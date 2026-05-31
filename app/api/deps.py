@@ -4,11 +4,11 @@ from typing import Annotated
 from fastapi import Depends, Request
 from fastapi.security import APIKeyHeader
 
+from app.agents.clinical_agent import ClinicalAgent
 from app.core.security import verify_api_key
 from app.services.audit_service import AuditService
 from app.services.document_service import DocumentService
 from app.services.llm_service import LLMService
-from app.agents.clinical_agent import ClinicalAgent
 
 api_key_scheme = APIKeyHeader(name="X-API-Key")
 

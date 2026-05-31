@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 
+from app.agents.clinical_agent import AgentQuery, AgentResponse
 from app.api.deps import (
     Agent,
     AnalysisService,
@@ -8,7 +9,6 @@ from app.api.deps import (
     ClientIp,
     RequestId,
 )
-from app.agents.clinical_agent import AgentQuery, AgentResponse
 from app.models.analysis import Analysis, AnalysisRequest
 from app.models.audit import AuditAction, AuditOutcome
 from app.services.document_service import DocumentNotFoundError
@@ -37,7 +37,7 @@ async def analyze_document(
             resource_id=request.document_id,
             detail="document_not_found",
         )
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Document not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Document not found") from None
 
     auditor.record(
         action=AuditAction.ANALYSIS_CREATE,
