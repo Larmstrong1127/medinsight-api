@@ -17,6 +17,11 @@ logger = structlog.get_logger(__name__)
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     settings = get_settings()
     configure_logging(debug=settings.debug)
+    if settings.environment != "development":
+        if "dev-key-change-me-in-production" in settings.get_api_keys():
+            raise RuntimeError("API_KEYS must be set to non-default values outside development")
+        if not settings.encryption_key:
+            raise RuntimeError("ENCRYPTION_KEY must be set outside development")
     logger.info("startup", environment=settings.environment, storage=settings.storage_backend)
     yield
     logger.info("shutdown")

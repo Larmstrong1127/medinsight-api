@@ -1,5 +1,6 @@
 import base64
 import os
+import secrets
 
 from cryptography.fernet import Fernet, InvalidToken
 from fastapi import HTTPException, Security, status
@@ -12,7 +13,10 @@ api_key_scheme = APIKeyHeader(name="X-API-Key", auto_error=False)
 
 def verify_api_key(api_key: str = Security(api_key_scheme)) -> str:
     settings = get_settings()
-    if not api_key or api_key not in settings.get_api_keys():
+    valid = api_key is not None and any(
+        secrets.compare_digest(api_key, k) for k in settings.get_api_keys()
+    )
+    if not valid:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or missing API key",
