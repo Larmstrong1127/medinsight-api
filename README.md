@@ -31,7 +31,7 @@ Clinical document intelligence platform. Secure ingestion, LLM-powered analysis,
            │
     ┌──────▼──────┐   ┌──────────────┐
     │ CloudTrail  │   │  OpenAI API  │
-    │ (audit log) │   │ (GPT-4o)     │
+    │ (audit log) │   │ (GPT-4o-mini)│
     └─────────────┘   └──────────────┘
 ```
 
@@ -40,7 +40,7 @@ Clinical document intelligence platform. Secure ingestion, LLM-powered analysis,
 | Layer | Technology |
 |---|---|
 | API | Python 3.11, FastAPI, Pydantic v2 |
-| AI | OpenAI GPT-4o, LangChain agents |
+| AI | OpenAI GPT-4o-mini (configurable via `OPENAI_MODEL`), LangGraph ReAct agent on LangChain |
 | Cloud | AWS ECS Fargate, S3, DynamoDB, KMS, CloudTrail |
 | IaC | Terraform (modular) |
 | Containers | Docker multi-stage, non-root user |
