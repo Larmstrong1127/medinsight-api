@@ -128,6 +128,13 @@ pytest tests/integration/ # integration
 
 ## AWS deployment
 
+> **Status: written, never run against a live account.** The Terraform below and the
+> `cd.yml` pipeline are complete and reviewed, but this project has never been applied
+> to a real AWS account — the CD workflow has no successful run. The S3, DynamoDB and
+> KMS code paths were exercised against LocalStack (see `docker-compose.yml`) instead of
+> paying for an idle Fargate cluster. Treat the commands below as the intended path, not
+> as a record of a live deployment.
+
 ```bash
 cd infrastructure/terraform
 terraform init
