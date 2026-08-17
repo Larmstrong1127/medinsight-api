@@ -11,7 +11,7 @@ Clinical document intelligence platform. Secure ingestion, LLM-powered analysis,
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                    GitHub Actions CI/CD                  │
-│          lint → test → docker build → ECS deploy        │
+│   lint → test → docker build → ECS deploy (never applied)│
 └─────────────────────┬───────────────────────────────────┘
                       │
               ┌───────▼────────┐
